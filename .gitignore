@@ -12,3 +12,6 @@ log/
 
 # Tools
 /.psalm/cache
+
+# OS and other misc
+.DS_Store
