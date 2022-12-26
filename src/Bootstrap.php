@@ -3,6 +3,7 @@
 namespace Myposter;
 
 use Dotenv\Dotenv;
+use \InvalidArgumentException;
 
 class Bootstrap
 {
@@ -30,7 +31,7 @@ class Bootstrap
     private static function create(): self
     {
         $application = new self();
-        $application->dotEnv = Dotenv::createImmutable(__DIR__ . DIRECTORY_SEPARATOR .  '../');
+        $application->dotEnv = Dotenv::createImmutable(static::getRootDirectoryPath());
         $application->dotEnv->load();
         return $application;
     }
@@ -38,5 +39,25 @@ class Bootstrap
     public function getEnv($envName)
     {
         return $_ENV[$envName];
+    }
+
+    public static function getRootDirectoryPath(): string
+    {
+        return __DIR__ . '/../';
+    }
+
+    public static function ensureDirectory(string $pathFromRoot): string
+    {
+        $directoryPath = static::getRootDirectoryPath() . $pathFromRoot;
+
+        if (!file_exists($directoryPath)) {
+            mkdir($directoryPath, 0755, true);
+        }
+
+        if (!is_dir($directoryPath)) {
+            throw new InvalidArgumentException('Path is not a directory!');
+        }
+
+        return $directoryPath;
     }
 }

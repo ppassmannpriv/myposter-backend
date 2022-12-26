@@ -2,7 +2,6 @@
 
 namespace Myposter\Logger;
 
-use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonologLogger;
 use Myposter\Bootstrap;
 
@@ -15,7 +14,7 @@ final class Logger
      *
      * @return MonologLogger
      */
-    static public function getLogger(): MonologLogger
+    public static function getLogger(): MonologLogger
     {
         if (self::$instance === null) {
             self::$instance = self::configureInstance();
@@ -26,15 +25,15 @@ final class Logger
 
     public static function configureInstance(): MonologLogger
     {
-        $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . '../log';
         $channelName = Bootstrap::getInstance()->getEnv('LOGGER_CHANNEL');
-        if (!file_exists($dir)) {
-            mkdir($dir, 0755, true);
-        }
 
-        $logger = new MonologLogger('MyPoster ' . $channelName);
-        $logger->pushHandler(new RotatingFileHandler($dir . DIRECTORY_SEPARATOR . $channelName . '.log', 5));
-        $logger->pushHandler(new DatabaseHandler());
+        $logger = new MonologLogger($channelName);
+        if (Bootstrap::getInstance()->getEnv('LOGGER_MAIN_HANDLER') === 'file') {
+            $logger->pushHandler(new FileHandler());
+        }
+        if (Bootstrap::getInstance()->getEnv('LOGGER_MAIN_HANDLER') === 'database') {
+            $logger->pushHandler(new DatabaseHandler());
+        }
 
         return $logger;
     }

@@ -29,3 +29,16 @@ VALUES (1000001, 'Bruce Wayne', 'Bruce Wayne, 1007 Mountain Drive, Gotham', 'Bru
         'Peter Parker, 20 Ingram Street, Forest Hills, Queens, New York City, New York',
         '{\"items\":[{\"item_type\":\"canvas\",\"size_height\":80,\"size_width\":80,\"amount\":1,\"image\":\"/files/canvas_1.jpg\"},{\"item_type\":\"poster\",\"size_height\":20,\"size_width\":20,\"amount\":2,\"image\":\"/files/poster_123.jpg\"},{\"item_type\":\"canvas\",\"size_height\":80,\"size_width\":80,\"amount\":3,\"image\":\"/files/canvas_2.jpg\"},{\"item_category\":\"accessory\",\"item_type\":\"tape\",\"amount\":4},{\"item_category\":\"frame\",\"item_type\":\"wooden-frame-1\",\"size_height\":80,\"size_width\":80,\"amount\":3},{\"item_category\":\"frame\",\"item_type\":\"wooden-frame-2\",\"size_height\":20,\"size_width\":20,\"amount\":2}]}',
         '2021-01-01 00:00:00', 'slicing');
+
+--
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+CREATE TABLE `logs`
+(
+    `json` json NOT NULL,
+    `created_at` datetime NOT NULL,
+    `log_level` varchar(15) NOT NULL,
+    `channel` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
