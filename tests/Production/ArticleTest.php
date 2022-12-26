@@ -2,8 +2,6 @@
 
 namespace Myposter\Tests\Production;
 
-use Monolog\ErrorHandler;
-use Myposter\Logger\Logger;
 use Myposter\Production\Article;
 use Myposter\Production\Exception\InvalidStateTransferException;
 use Myposter\Production\ProcessManager;

@@ -65,7 +65,7 @@ final class Article
 	public function enableGiftWrapping(): self
 	{
 		$this->hasGiftWrapping = true;
-        Logger::debug('Article now has gift wrapping enabled!', ['article' => $this]);
+        Logger::debug('Article now has gift wrapping enabled!');
 		return $this;
 	}
 

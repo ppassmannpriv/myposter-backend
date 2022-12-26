@@ -58,14 +58,4 @@ class Sequence
     {
         return get_class($currentProcessState) === static::$processSequence[0];
     }
-
-    public function isLastState(StateInterface $currentProcessState): bool
-    {
-        return get_class($currentProcessState) === static::$processSequence[count(static::$processSequence) - 1];
-    }
-
-    public function isCurrentState(StateInterface $state): bool
-    {
-        return get_class($this->getCurrentState()) === get_class($state);
-    }
 }
