@@ -2,19 +2,22 @@
 
 namespace Myposter\Shipping;
 
+use Myposter\Api\CustomerApi;
+use Myposter\Api\CustomerDataApiMock;
 use Myposter\Api\Entity\Customer;
 use Myposter\Shipping\Entity\Street;
 
 final class AddressValidator
 {
-	/**
-	 * @return Customer[]
-	 */
+    /**
+     * @return Customer[]
+     * @throws \JsonException
+     */
 	public function getAllCustomers(): array
 	{
-		// TODO: Retrieve customers from \Myposter\API\CustomerDataApiMock
+        $customerApi = new CustomerApi(new CustomerDataApiMock);
 
-		return [];
+		return $customerApi->getAllCustomers();
 	}
 
 	/**

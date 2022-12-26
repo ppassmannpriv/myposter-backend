@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Myposter\Tests\Production;
+namespace Myposter\Tests\Shipping;
 
 use Myposter\Api\Entity\Customer;
 use Myposter\Shipping\AddressValidator;
@@ -15,6 +15,7 @@ final class AddressTest extends TestCase
 	public function testAddressSplit(Customer $customer, Street $expectedStreet): void
 	{
 		$addressValidator = new AddressValidator();
+        var_dump($addressValidator->getAllCustomers());
 		$street           = $addressValidator->splitStreet($customer);
 
 		self::assertEquals($expectedStreet->name, $street->name);

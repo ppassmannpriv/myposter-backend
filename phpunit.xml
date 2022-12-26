@@ -16,5 +16,6 @@
 	<php>
 		<env name="LOGGER_MAIN_HANDLER" value="file" force="false" />
 		<env name="LOGGER_CHANNEL" value="testing" force="false" />
+		<env name="DATABASE_URL" value="sqlite::memory" force="false" />
 	</php>
 </phpunit>

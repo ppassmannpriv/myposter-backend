@@ -41,6 +41,11 @@ class Bootstrap
         return $_ENV[$envName];
     }
 
+    public function setEnv($envName, $envValue): void
+    {
+        $_ENV[$envName] = $envValue;
+    }
+
     public static function getRootDirectoryPath(): string
     {
         return __DIR__ . '/../';
