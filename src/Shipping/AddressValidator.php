@@ -6,6 +6,7 @@ use Myposter\Api\CustomerApi;
 use Myposter\Api\CustomerDataApiMock;
 use Myposter\Api\Entity\Customer;
 use Myposter\Shipping\Entity\Street;
+use Myposter\Shipping\Exception\AddressSplitException;
 
 final class AddressValidator
 {
@@ -20,18 +21,20 @@ final class AddressValidator
 		return $customerApi->getAllCustomers();
 	}
 
-	/**
-	 * Split a given street string from a customer into
-	 * street name and house number.
-	 *
-	 * @param Customer $customer
-	 * @return Street
-	 * @throws \Exception
-	 */
+    /**
+     * Split a given street string from a customer into
+     * street name and house number.
+     *
+     * @param Customer $customer
+     * @return Street
+     * @throws AddressSplitException
+     */
 	public function splitStreet(Customer $customer): Street
 	{
-		// TODO: Implement
+        if (!preg_match('/(?<street>\D+?)\s*(?<houseNumber>\d.*)?+$/isu', $customer->getStreet(), $splitResults)) {
+            throw new AddressSplitException('Cannot determine street or house number.');
+        }
 
-		throw new \Exception('method not implemented', 1626964164621);
-	}
+		return new Street($splitResults['street'], $splitResults['houseNumber'] ?? '');
+    }
 }

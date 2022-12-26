@@ -5,6 +5,7 @@ namespace Myposter\Tests\Shipping;
 use Myposter\Api\Entity\Customer;
 use Myposter\Shipping\AddressValidator;
 use Myposter\Shipping\Entity\Street;
+use Myposter\Shipping\Exception\AddressSplitException;
 use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
@@ -15,12 +16,19 @@ final class AddressTest extends TestCase
 	public function testAddressSplit(Customer $customer, Street $expectedStreet): void
 	{
 		$addressValidator = new AddressValidator();
-        var_dump($addressValidator->getAllCustomers());
 		$street           = $addressValidator->splitStreet($customer);
 
 		self::assertEquals($expectedStreet->name, $street->name);
 		self::assertEquals($expectedStreet->number, $street->number);
 	}
+
+    public function testAddressSlitThrowsException(): void
+    {
+        $addressValidator = new AddressValidator();
+        $customer = new Customer('', '', '', '', '');
+        self::expectExceptionObject(new AddressSplitException('Cannot determine street or house number.'));
+        $addressValidator->splitStreet($customer);
+    }
 
 	/**
 	 * @return \Generator
