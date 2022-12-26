@@ -1,0 +1,14 @@
+# Project
+vendor/
+.env
+log/
+
+# PHP Unit
+/.phpunit.cache
+.phpunit.result.cache
+
+# IDE
+.idea/
+
+# Tools
+/.psalm/cache
