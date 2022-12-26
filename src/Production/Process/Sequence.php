@@ -31,8 +31,9 @@ class Sequence
     public function isValidNextState(StateInterface $state): bool
     {
         if ($this->getCurrentState() === null) {
-            return static::$processSequence[0] === get_class($state);
+            return static::isFirstState($state);
         }
+
         $currentProcessStateKey = array_search(get_class($this->getCurrentState()), static::$processSequence);
         $nextProcessStep = new static::$processSequence[$currentProcessStateKey + 1];
 
@@ -43,18 +44,6 @@ class Sequence
         return get_class($state) === get_class($nextProcessStep);
     }
 
-    public function isFinished(StateInterface $currentProcessState): bool
-    {
-        $lastProcessStateType = static::$processSequence[count(static::$processSequence) - 1];
-
-        return get_class($currentProcessState) === $lastProcessStateType;
-    }
-
-    public function isStarted(): bool
-    {
-        return static::$processSequence[0] === get_class($this->getCurrentState());
-    }
-
     public function setCurrentState(StateInterface $state): void
     {
         $this->currentState = $state;
@@ -63,6 +52,16 @@ class Sequence
     public function getCurrentState(): ?StateInterface
     {
         return $this->currentState;
+    }
+
+    public function isFirstState(StateInterface $currentProcessState): bool
+    {
+        return get_class($currentProcessState) === static::$processSequence[0];
+    }
+
+    public function isLastState(StateInterface $currentProcessState): bool
+    {
+        return get_class($currentProcessState) === static::$processSequence[count(static::$processSequence) - 1];
     }
 
     public function isCurrentState(StateInterface $state): bool

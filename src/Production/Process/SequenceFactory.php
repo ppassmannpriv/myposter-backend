@@ -3,6 +3,8 @@
 namespace Myposter\Production\Process;
 
 use Myposter\Production\Article;
+use Myposter\Production\Process\Sequence\PosterFramedSequence;
+use Myposter\Production\Process\Sequence\PrintedGlassSequence;
 use Myposter\Production\State\StateInterface;
 
 final class SequenceFactory
