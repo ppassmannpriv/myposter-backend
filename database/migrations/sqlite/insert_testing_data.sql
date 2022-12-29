@@ -23,21 +23,24 @@ UPDATE `customers` SET
     `delivery_address_id` = (SELECT `id` FROM `addresses` WHERE `firstname` = 'Maybelle' AND `lastname` = 'Parker')
 WHERE `firstname` = 'Peter' AND `lastname` = 'Parker';
 
-INSERT INTO `orders` (`customer_id`, `delivery_address_id`, `invoice_address_id`, `status`, `created_at`)
+INSERT INTO `orders` (`customer_id`, `delivery_address_id`, `invoice_address_id`, `status`, `created_at`, `updated_at`)
 VALUES (1000001,
         (SELECT `delivery_address_id` FROM `customers` WHERE `id` = 1000001),
         (SELECT `invoice_address_id` FROM `customers` WHERE `id` = 1000001),
         'ordered',
+        '2021-01-01 00:00:00',
         '2021-01-01 00:00:00'),
         (1000001,
         (SELECT `delivery_address_id` FROM `customers` WHERE `id` = 1000001),
         (SELECT `invoice_address_id` FROM `customers` WHERE `id` = 1000001),
         'shipped',
+        '2021-01-01 00:00:00',
         '2021-01-01 00:00:00'),
         (1000002,
         (SELECT `delivery_address_id` FROM `customers` WHERE `id` = 1000002),
         (SELECT `invoice_address_id` FROM `customers` WHERE `id` = 1000002),
         'slicing',
+        '2021-01-01 00:00:00',
         '2021-01-01 00:00:00');
 
 INSERT INTO `order_items` (`item_type`, `amount`, `image`, `size_height`, `size_width`, `order_id`)

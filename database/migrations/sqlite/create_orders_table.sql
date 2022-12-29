@@ -13,5 +13,6 @@ CREATE TABLE orders
         constraint orders_invoice_address_id_fk
             references addresses (id),
     status varchar(30) not null,
-    created_at datetime default CURRENT_TIMESTAMP not null
+    created_at datetime default not null,
+    updated_at datetime default not null
 )
