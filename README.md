@@ -19,7 +19,9 @@ Um deine vollendete Aufgabe einzureichen, schicke uns bitte eine `.zip` Datei, w
 Zunächst möchte ich mich nochmal bedanken für die Gelegenheit eine doch sehr interessante Aufgabe bearbeiten zu können! Ich habe etwas über 4 Stunden gebraucht und danach aus eigenem Interesse noch einige Sachen ausprobiert.
 
 Zum vierten Teil der Aufgabe habe ich noch einige Anmerkungen. Die bestehende Struktur kann in einige Richtungen optimiert werden und ich war mir nicht sicher, ob diese gekoppelt ist an die voranstehenden Aufgaben. Die `orders` haben in meiner Lösung das `status` Feld behalten. Hier würde ich tatsächlich eher den Status der jeweiligen Bestellungen sehen und keine direkten Produktionsschritte, wie in der Aufgabe 1. Ich würde selber auch eine `articles` Tabelle für möglich halten um die Produkte darzustellen.
+
 Ich habe hier auch mich auf meine Erfahrung mit eCommerce Systemen verlassen und hier versucht so weit ich konnte mir eine solide Struktur zu überlegen. Ich habe bewusst eine Tabelle für Artikeltypen weggelassen, da ich persönlich es immer Vorziehe so etwas in Code festzuhalten mit Validierung etc. wie auch in Teilaufgabe 1. So kann sichergestellt werden, dass Implementierungsdetails direkt mitgeliefert werden zu eventuellen neuen Artikeltypen.
+
 Weitergehend kann man das natürlich komplett weiter auszeichnen mit verschiedenen Stufen im Produktions- und Bestellprozess, damit man Entitäten besser darstellen kann und hier auch zum Beispiel geschützt davor ist, wenn eine Adresse angepasst wird. Hier kann man mit einer order_addresses Tabelle arbeiten oder aus orders weiter gehen und invoices machen etc. Selber schaue ich hierfür gerne nach was zum Beispiel in Magento 2 geschiet oder ähnliche Systeme!
 
 ## Aufgabenbeschreibung
