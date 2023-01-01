@@ -11,5 +11,8 @@ CREATE TABLE order_items
     size_width integer null,
     order_id integer not null
         constraint order_items_orders_null_fk
-            references orders (id)
-)
+            references orders (id),
+    article_id integer not null
+        constraint order_items_articles_null_fk
+            references articles (id)
+);

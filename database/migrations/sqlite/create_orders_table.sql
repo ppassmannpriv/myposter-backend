@@ -1,18 +1,18 @@
 CREATE TABLE orders
 (
-    id  integer
+    id                  integer
         constraint orders_pk
             primary key autoincrement,
-    customer_id integer not null
+    customer_id         integer     not null
         constraint orders_customers_null_fk
             references customers (id),
-    delivery_address_id integer not null
-        constraint orders_delivery_address_id_fk
+    delivery_address_id integer     not null
+        constraint orders_addresses_null_fk
             references addresses (id),
-    invoice_address_id integer not null
-        constraint orders_invoice_address_id_fk
+    invoice_address_id  integer     not null
+        constraint orders_addresses_null_fk
             references addresses (id),
-    status varchar(30) not null,
-    created_at datetime default not null,
-    updated_at datetime default not null
-)
+    status              varchar(30) not null,
+    created_at          datetime    not null,
+    updated_at          datetime    not null
+);

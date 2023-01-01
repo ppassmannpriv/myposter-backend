@@ -1,3 +1,13 @@
+INSERT INTO `article_categories` (`name`)
+VALUES ('production'), ('accessory'), ('frame');
+
+INSERT INTO `articles` (`type`, `name`, `category_id`)
+VALUES ('poster', 'Poster', (SELECT `id` FROM `article_categories` WHERE `name` = 'production')),
+       ('canvas', 'Canvas', (SELECT `id` FROM `article_categories` WHERE `name` = 'production')),
+       ('tape', 'Tape', (SELECT `id` FROM `article_categories` WHERE `name` = 'accessory')),
+       ('wooden-frame-1', 'Wooden Frame 1', (SELECT `id` FROM `article_categories` WHERE `name` = 'frame')),
+       ('wooden-frame-2', 'Wooden Frame 2', (SELECT `id` FROM `article_categories` WHERE `name` = 'frame'));
+
 INSERT INTO `customers` (`id`, `firstname`, `lastname`)
 VALUES (1000001, 'Bruce', 'Wayne'),
        (1000002, 'Peter', 'Parker');
@@ -43,17 +53,17 @@ VALUES (1000001,
         '2021-01-01 00:00:00',
         '2021-01-01 00:00:00');
 
-INSERT INTO `order_items` (`item_type`, `amount`, `image`, `size_height`, `size_width`, `order_id`)
-VALUES  ('poster', 2, '/files/poster_1.jpg', 80, 60, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'ordered')),
-        ('poster', 1, '/files/poster_2.jpg', 80, 60, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'ordered')),
-        ('canvas', 1, '/files/canvas_1.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'shipped')),
-        ('canvas', 1, '/files/canvas_1.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing')),
-        ('poster', 2, '/files/poster_123.jpg', 20, 20, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing')),
-        ('canvas', 3, '/files/canvas_2.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'));
+INSERT INTO `order_items` (`item_type`, `amount`, `image`, `size_height`, `size_width`, `order_id`, `article_id`)
+VALUES  ('poster', 2, '/files/poster_1.jpg', 80, 60, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'ordered'), (SELECT `id` FROM `articles` WHERE `type` = 'poster')),
+        ('poster', 1, '/files/poster_2.jpg', 80, 60, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'ordered'), (SELECT `id` FROM `articles` WHERE `type` = 'poster')),
+        ('canvas', 1, '/files/canvas_1.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000001 AND `status` = 'shipped'), (SELECT `id` FROM `articles` WHERE `type` = 'canvas')),
+        ('canvas', 1, '/files/canvas_1.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'canvas')),
+        ('poster', 2, '/files/poster_123.jpg', 20, 20, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'poster')),
+        ('canvas', 3, '/files/canvas_2.jpg', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'canvas'));
 
-INSERT INTO `order_items` (`item_type`, `amount`, `item_category`, `order_id`)
-VALUES  ('tape', 4, 'accessory', (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'));
+INSERT INTO `order_items` (`item_type`, `amount`, `item_category`, `order_id`, `article~id`)
+VALUES  ('tape', 4, 'accessory', (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'tape'));
 
-INSERT INTO `order_items` (`item_type`, `amount`, `item_category`, `size_height`, `size_width`, `order_id`)
-VALUES  ('wooden-frame-1', 3, 'frame', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing')),
-        ('wooden-frame-2', 2, 'frame', 20, 20, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'));
+INSERT INTO `order_items` (`item_type`, `amount`, `item_category`, `size_height`, `size_width`, `order_id`, `article_id`)
+VALUES  ('wooden-frame-1', 3, 'frame', 80, 80, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'wooden-frame-1')),
+        ('wooden-frame-2', 2, 'frame', 20, 20, (SELECT `id` FROM `orders` WHERE `customer_id` = 1000002 AND `status` = 'slicing'), (SELECT `id` FROM `articles` WHERE `type` = 'wooden-frame-2'));
