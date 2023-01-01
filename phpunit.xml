@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://phpunit.readthedocs.io/en/9.5/configuration.html -->
-<phpunit
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
-	colors="true"
->
-	<extensions>
-		<extension class="Myposter\Tests\Hook\BypassFinalHook"/>
-	</extensions>
-	<testsuites>
-		<testsuite name="Project Test Suite">
-			<directory>tests</directory>
-		</testsuite>
-	</testsuites>
-	<php>
-		<env name="LOGGER_MAIN_HANDLER" value="file" force="false" />
-		<env name="LOGGER_CHANNEL" value="testing" force="false" />
-		<env name="DATABASE_URL" value="sqlite::memory:" force="false" />
-	</php>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" colors="true">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </coverage>
+  <extensions>
+    <extension class="Myposter\Tests\Hook\BypassFinalHook"/>
+  </extensions>
+  <testsuites>
+    <testsuite name="Project Test Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="LOGGER_MAIN_HANDLER" value="file" force="false"/>
+    <env name="LOGGER_CHANNEL" value="testing" force="false"/>
+    <env name="DATABASE_URL" value="sqlite::memory:" force="false"/>
+  </php>
 </phpunit>

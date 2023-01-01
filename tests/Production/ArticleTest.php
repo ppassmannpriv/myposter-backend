@@ -230,6 +230,16 @@ final class ArticleTest extends TestCase
 				new Shipped(),
 			],
 		];
+
+        // Invalid Step in Sequence
+        yield 'Slice printed glass' => [
+            [
+                new Ordered(),
+                new Sliced(),
+                new Printed(),
+                new Shipped()
+            ]
+        ];
 	}
 
 	/**
@@ -299,4 +309,10 @@ final class ArticleTest extends TestCase
 			$this->manager->confirmAndMoveToState($state, $article);
 		}
 	}
+
+    public function testArticleNotInstancedOnInvalidType(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new Article('test');
+    }
 }

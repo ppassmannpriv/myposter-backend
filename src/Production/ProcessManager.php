@@ -18,7 +18,6 @@ final class ProcessManager
 	{
         $processSequence = $article->getProcessSequence();
         $processSequence->updateGiftWrapping($article->hasGiftWrapping());
-        // Try catch to first log and then re-throw our Throwable. PHPUnit writes all errors to STDERR, so this is my crutch.
         try {
             if (!$processSequence->stateExists($state)) {
                 throw new InvalidStateTransferException(sprintf('State %s is not in %s sequence.', $state->getType(), $article->getType()));
@@ -28,7 +27,7 @@ final class ProcessManager
             }
             $article->getProcessSequence()->setCurrentState($state);
         } catch (\Throwable $throwable) {
-            Logger::getLogger()->error($throwable);
+            Logger::getLogger()->error($throwable, ['state' => $state, 'article' => $article]);
             throw $throwable;
         }
 	}
