@@ -6,9 +6,6 @@
       <directory suffix=".php">./src</directory>
     </include>
   </coverage>
-  <extensions>
-    <extension class="Myposter\Tests\Hook\BypassFinalHook"/>
-  </extensions>
   <testsuites>
     <testsuite name="Project Test Suite">
       <directory>tests</directory>
