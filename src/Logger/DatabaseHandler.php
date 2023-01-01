@@ -37,9 +37,6 @@ class DatabaseHandler extends AbstractProcessingHandler
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getDefaultFormatter(): FormatterInterface
     {
         return new JsonFormatter(JsonFormatter::BATCH_MODE_NEWLINES, false);

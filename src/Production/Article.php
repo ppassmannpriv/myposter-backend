@@ -69,7 +69,7 @@ final class Article
 		return $this;
 	}
 
-	public function getState(): StateInterface
+	public function getState(): ?StateInterface
 	{
 		return $this->getProcessSequence()->getCurrentState();
 	}

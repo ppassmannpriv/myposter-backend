@@ -36,7 +36,12 @@ class Bootstrap
         return $application;
     }
 
-    public function getEnv($envName)
+    /**
+     * @psalm-param 'DATABASE_URL'|'LOGGER_CHANNEL'|'LOGGER_MAIN_HANDLER' $envName
+     *
+     * @return scalar
+     */
+    public function getEnv(string $envName)
     {
         return $_ENV[$envName];
     }
