@@ -2,6 +2,7 @@
   "name": "myposter/backend",
   "description": "Myposter Backend Application Project",
   "type": "project",
+  "license": "MIT",
   "scripts": {
     "test": "vendor/bin/phpunit"
   },
