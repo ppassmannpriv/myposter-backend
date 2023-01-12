@@ -2,7 +2,7 @@
 
 namespace Myposter\Api;
 
-use \Myposter\Api\CustomerDataApiMock as CustomerDataSource;
+use Myposter\Api\CustomerDataApiMock as CustomerDataSource;
 use Myposter\Api\Entity\Customer;
 
 class CustomerApi
